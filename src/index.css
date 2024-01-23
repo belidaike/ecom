@@ -1,0 +1,39 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* line-height: 1.5; */
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*
+ 008080 like bluegreen
+ 050505 black 
+ DDDBCB greyish 
+ */
+
+/* 
+#527853 dark greenish
+ #F9E8D9 peach
+ #F7B787 light orange
+ #EE7214 darker orange
+ */
+
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
+
+@media(min-width: 1920px) {
+
+  body {
+    /* background-image: linear-gradient(to right, grey, rgb(224, 221, 221)); */
+  }
+}

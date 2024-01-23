@@ -1,0 +1,32 @@
+.benefit {
+    padding: 50px 0;
+    background-color: rgb(207, 203, 203);
+}
+
+.benefit ul {
+    display: flex;
+    margin: 0 auto;
+    font-size: 1rem;
+    list-style: none;
+    justify-content: space-evenly;
+    background-color: orange;
+    width: 90%;
+}
+
+.benefit-ul>:nth-child(1) {
+    padding: 1rem;
+    background-color: #EE7214;
+    text-align: center;
+}
+
+.benefit-ul>:nth-child(2) {
+    padding: 1rem;
+    background-color: #349738;
+    text-align: center;
+}
+
+.benefit-ul>:nth-child(3) {
+    padding: 1rem;
+    background-color: #F9E8D9;
+    text-align: center;
+}

@@ -1,0 +1,11 @@
+.input {
+    scale: 1rem;
+    font-size: 2rem;
+    padding: 0;
+}
+
+.btn {
+    background-color: blue;
+    height: 100px;
+    width: 500px;
+}
