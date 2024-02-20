@@ -1,77 +1,68 @@
 import React, { useContext, useState } from 'react'
-import { PRODUCTS } from '../../products'
+import { CATEGORIES } from '../../categories'
 import './shop.css'
 import { ShopContext } from '../../context/shop-context'
 import { Product } from './product'
+import Category from './Category'
 
 const Shop = () => {
-    const [search, setSearch] = useState('')
-    const { addToCart, cartItems, filteredProducts } = useContext(ShopContext);
+    const compareByPriceUp = (a, b) => a.price - b.price
+    const compareByPriceDown = (a, b) => b.price - a.price
+    const [sortACS, setSortACS] = useState(false)
+    const [sortDES, setSortDEC] = useState(false)
+    const { addToCart, filteredProducts, setSearch } = useContext(ShopContext);
+    if (sortACS === true) {
+        const sortedArrayUp = filteredProducts.sort(compareByPriceUp)
+    } if (sortDES === true) {
+        const sortedArrayDown = filteredProducts.sort(compareByPriceDown)
+    }
+
     return (
         <div className='shop'>
-
             {/* Category */}
-            <ul className='categories'>
-                {PRODUCTS.map((item) => (
-                    <li className='category' key={item.id}>
-                        {item.productCategory}
-                    </li>
-                ))}
-            </ul>
+            <div className='paddings categories-wrapper'>
+                <h1 className='flexCenter category-title' onClick={() => setSearch('')} title='All Categories'>Categories</h1>
+                <div className="paddings categories">
+                    {CATEGORIES.map(item => <Category key={item.id} data={item} />)}
+                </div>
+            </div>
+
+
             {/* End Category */}
 
             {/* Products */}
-            <div className="products">
-                {
-                    filteredProducts.map(item => <Product key={item.id} item={item} />)
+            <div className="products-wrapper">
+
+                {filteredProducts.length > 0
+                    ?
+                    <div>
+                        <div className='paddings shop-title'><h1>All for YOU!</h1></div>
+                        <div className='paddings options'>
+                            <label onClick={() => { setSortACS(false), setSortDEC(false), console.log('hello') }}>sort by:</label>
+                            <button className='button' onClick={() => { setSortACS(true), setSortDEC(false) }}>asc</button>
+                            <button className='button' onClick={() => { setSortDEC(true), setSortACS(false) }}>des</button>
+                        </div>
+                    </div>
+                    : ''}
+
+                {filteredProducts.length > 0 ?
+                    (
+                        <div className="products">
+
+                            {
+                                filteredProducts.map(item =>
+                                    <Product key={item.id} item={item} />)
+                            }
+                        </div>
+                    )
+                    : <div className='paddings noItem'>
+                        <h3 className='paddings'>There is no such item found.</h3></div>
                 }
             </div>
             {/* End Products */}
-
         </div >
     )
+
 }
 
 export default Shop
-
-
-
-
-
-
-
-
-
-
-
-
-// import React, { useContext, useState } from 'react'
-// import { ShopContext } from '../../context/shop-context'
-// import './product.css'
-
-// const Product = (props) => {
-//     const { id, productName, price, productImage, productCategory } = props.data;
-//     const { addToCart, cartItems } = useContext(ShopContext);
-//     const cartItemCount = cartItems[id];
-
-//     return (
-//         <div className='product'>
-//             <img src={productImage} alt={productName} />
-//             <div className="product-name">
-//                 <h2>{productName}</h2>
-//                 <h4>Category: {productCategory}</h4>
-//             </div>
-//             <div className="product-price">
-//                 <h2>${price}</h2>
-//             </div>
-//             <div className='product-add'>
-//                 <button onClick={() => addToCart(id)}>Add to Cart {cartItemCount}</button>
-//             </div>
-//         </div>
-//     )
-// }
-
-// export default Product
-
-
-

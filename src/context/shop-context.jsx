@@ -14,6 +14,7 @@ const getDefaultCart = () => {
 
 export const ShopContextProvider = (props) => {
     const [cartItems, setCartItems] = useState(getDefaultCart());
+    const [countCart, setCountCart] = useState(0)
 
     //filter
     const [search, setSearch] = useState('')
@@ -23,12 +24,14 @@ export const ShopContextProvider = (props) => {
             item.productCategory.toLowerCase().includes(search.toLowerCase())
         )
     })
+
     const handleChange = e => {
         setSearch(e.target.value)
     }
 
     //end filter
 
+    //total amount of carts
     const getTotalCartAmount = () => {
         let totalAmount = 0;
         for (const item in cartItems) {
@@ -39,12 +42,24 @@ export const ShopContextProvider = (props) => {
         }
         return totalAmount;
     };
+    //end total amount of carts
 
-    const addToCart = (itemId) => {
+    const addToCart = (itemId, e) => {
+
         setCartItems((prev) => (
             {
                 ...prev,
-                [itemId]: prev[itemId] + 1
+                [itemId]: prev[itemId] + 1,
+
+            }
+        ))
+    }
+
+    const removeFromCart = (itemId) => {
+        setCartItems((prev) => (
+            {
+                ...prev,
+                [itemId]: prev[itemId] - 1
             }
         ))
     }
@@ -56,18 +71,12 @@ export const ShopContextProvider = (props) => {
             }
         ))
     }
-    const removeFromCart = (itemId) => {
-        setCartItems((prev) => (
-            {
-                ...prev,
-                [itemId]: prev[itemId] - 1
-            }
-        ))
-    }
 
+    //update cart in input
     const updateCartItemCount = (newAmount, itemId) => {
         setCartItems((prev) => ({ ...prev, [itemId]: newAmount }));
     };
+    //end update cart in input
 
     const checkout = () => {
         setCartItems(getDefaultCart());
@@ -85,9 +94,11 @@ export const ShopContextProvider = (props) => {
         filteredProducts,
         setSearch,
         handleChange,
+        setCountCart,
+        countCart,
     };
-    console.log(cartItems)
-
+    // console.log(countCart)
+    // console.log(cartItems)
     return (
         <ShopContext.Provider value={contextValue}>
             {props.children}

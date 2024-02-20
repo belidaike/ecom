@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../../context/shop-context";
 import { Link, useNavigate } from "react-router-dom";
+const Sort = (props) => {
+    const { id, productName, price, productImage, productCategory } = props.item
 
-export const Product = (props) => {
-    const { id, productName, price, productImage, productCategory } = props.item;
     const { addToCart, cartItems, setCountCart } = useContext(ShopContext);
     const cartItemCount = cartItems[id];
+    console.log(id)
     const navigate = useNavigate()
-
     return (
-        <section className="product" >
+        <section className="product">
             <div className="kani">
                 <img src={productImage} onClick={() => navigate(`/product/${id}`)} alt="" />
             </div>
@@ -32,7 +32,7 @@ export const Product = (props) => {
                 </button>
             </div>
         </section>
-    );
-};
+    )
+}
 
-
+export default Sort

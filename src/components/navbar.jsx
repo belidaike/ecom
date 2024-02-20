@@ -1,22 +1,29 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { FaShoppingCart } from "react-icons/fa";
 import './navbar.css'
 import { useContext } from 'react';
 import { ShopContext } from '../context/shop-context';
+import logo from '/logo.png'
 
 const Navbar = (props) => {
-    const { handleChange } = useContext(ShopContext)
-    const navigate = useNavigate()
+    const { handleChange, countCart } = useContext(ShopContext)
 
     return (
-        <nav>
-            <h1 className='nav-logo' onClick={() => navigate('/')}>Lorem</h1>
-            <input type="search" className='nav-search' placeholder='Search Here' onChange={handleChange} />
-            <ul>
-                <Link to='/cart'><li><FaShoppingCart size={45} /></li></Link>
-
-            </ul>
-        </nav >
+        <nav className="nav-wrapper">
+            <div className="nav-container">
+                <span>
+                    <Link to="/"><img src={logo} width={50} alt="" /></Link>
+                    <h4>LeapShop</h4>
+                </span>
+                <input type="text" placeholder='Search' onChange={handleChange} />
+                <div className="nav-menu">
+                    <span className='cart'>
+                        <Link to='/cart'><FaShoppingCart size={32} className='nav-svg' /></Link>
+                        <span className='countCart'>{countCart}</span>
+                    </span>
+                </div>
+            </div>
+        </nav>
     )
 }
 

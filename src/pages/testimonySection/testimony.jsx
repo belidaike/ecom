@@ -1,11 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './testimony.css'
+import { PRODUCTS } from '../../products'
 
 const Testimony = () => {
+    const [activeIndex, setActiveIndex] = useState(0)
+
     return (
-        <div className='testimony'>
-            <h1>Testimony</h1>
-        </div>
+        <section className="testimony">
+            <div className="carousel">
+                <div className="inner"></div>
+            </div>
+        </section>
     )
 }
 
